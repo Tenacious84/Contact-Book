@@ -1,0 +1,52 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="avatarImage">
+    </div>
+    <form id="editform">
+        <label for="firstname">Firstname</label>
+        <input type="text" id="firstname" name="firstname" readonly></input>
+        <br>
+        <label for="lastname">Lastname</label>
+        <input type="text" id="lastname" name="lastname" readonly></input>
+        </br>
+        <label for="mobile">Mobile</label>
+        <input type="text" id="mobile" name="mobile" readonly></input>
+        <br>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" readonly></input>
+        </br>
+        <label for="avatar" id="avatarLabel " hidden>Change profile image</label>
+        <input type="file" id="avatar" name="avatar" readonly></input>
+        <br>
+        <button id="submitForm" type="submit" hidden>Submit</button>
+        </br>
+
+    </form>
+    <button id="homeLink" type="button">Home</button>
+    <button id="editContact" type="button">Edit</button>
+    <button id="deleteContact" type="button">Delete</button>
+
+    <script src="config.js"></script>
+    <script>
+        var id = getId();
+        console.log("The id is :"+ id);
+
+        
+        function getId() {
+            //var url = window.location.href;-this is a JavaScript property that returns the full url of the current window that is open
+            var url = window.location.href;
+            var pos = url.search("=");
+            var id = url.slice(pos + 1)
+            return id;
+        }
+    </script>
+</body>
+
+</html>

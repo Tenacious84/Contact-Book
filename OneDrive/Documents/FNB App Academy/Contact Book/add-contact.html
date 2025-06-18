@@ -1,0 +1,75 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- ADD NEW CONTACT -->
+    <form id="editform">
+        <label for="firstname">Firstname</label>
+        <input type="text" id="firstname" name="firstname"></input>
+        <br>
+        <label for="lastname">Lastname</label>
+        <input type="text" id="lastname" name="lastname"></input>
+        </br>
+        <label for="mobile">Mobile</label>
+        <input type="text" id="mobile" name="mobile"></input>
+        <br>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email"></input>
+        </br>
+        <label for="avatar">Select a file</label>
+        <input type="file" id="avatar" name="avatar"></input>
+        <br>
+        <button id="submitForm" type="submit">Submit</button>
+        </br>
+
+    </form>
+    <br>
+    <button id="homeLink" type="button">Home</button>
+    <br></br>
+    <script src="config.js"></script>
+    <script>
+        document.getElementById("submitForm").addEventListener('click', submitForm);
+        document.getElementById('homeLink').addEventListener('click', homeLink);
+
+
+        //. ADD NEW CONTACT FUNCTION
+
+        function submitForm(e) {
+            // parameter (e) is to prevent default behaviour of a form and this meant to prevent the reloading of the page but rather submitting the information
+            e.preventDefault();
+
+            const form = new FormData(document.querySelector('#editForm'));
+            //    Because the user does not know the api key we have to inject it into the form
+            form.append('apiKey', apiKey);
+
+            fetch(rootPath + 'controller/insert-contact/', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json,*.*' },
+                body: form
+            })
+                .then(function (response) {
+                    return response.text();
+                })
+                .then(function (data) {
+                    if (data == "1") {
+                        alert("Contact added.");
+                        homeLink();
+                    }
+                    else {
+                        alert(data);
+                        homeLink();
+                    }
+                })
+        }
+        function homeLink() {
+            window.open("index.html", "_self");
+        }
+    </script>
+</body>
+
+</html>
